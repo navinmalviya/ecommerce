@@ -1,0 +1,28 @@
+
+<h1 class="mt-4">All product categories</h1>
+ 
+<table class="table mt-4">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th colspan="4"></th>
+  </tr>
+ 
+  <% @product_categories.each do |prod_cat| %>
+    <tr>
+      <td><%= prod_cat.name %></td>
+      <td><%= prod_cat.description %></td>
+      <td><% if prod_cat.cover_image.present? %>
+              <%= image_tag prod_cat.cover_image.thumb.url %>
+          <% else %>
+              <%= image_tag('noimage.png') %>
+      <% end %></td>
+      <td><%= link_to 'Show', product_category_path(prod_cat) %></td>
+      <td><%= link_to 'Edit', edit_product_category_path(prod_cat) %></td>
+      <td><%= link_to 'Destroy', product_category_path(prod_cat),
+                                  method: :delete,
+                                  data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

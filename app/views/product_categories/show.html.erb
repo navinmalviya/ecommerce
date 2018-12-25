@@ -1,0 +1,21 @@
+<div class="container">
+<p>
+  <strong>Name:</strong>
+  <%= @product_category.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product_category.description %>
+</p>
+
+<p>
+  <strong>Cover image:</strong>
+  <% if @product_category.cover_image.present? %>
+    <%= image_tag @product_category.cover_image.showthumb.url %>
+  <% else %>
+    <%= image_tag('noimage.png') %>
+  <% end %>
+</p>
+
+</div>
