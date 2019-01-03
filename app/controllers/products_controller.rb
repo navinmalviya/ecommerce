@@ -5,11 +5,11 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    
   end
 
   def index
-    @products = Product.all
+    @search = Product.search(params[:q])
+    @products = @search.result
   end
 
   def create
@@ -43,6 +43,6 @@ class ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:products).permit(:name, :description, :cover_image, :product_category_id, :status, :is_active, :price)
+      params.require(:product).permit(:name, :description, :image, :cover_image, :product_category_id, :status, :is_active, :price, images_attributes: [:image, :imageable_id, :imageable_type])
     end
 end

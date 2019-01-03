@@ -1,4 +1,4 @@
-<%= form_with scope: :products, url: products_path, local: true do |form| %>
+<%= form_for @product, url: products_path, local: true do |form| %>
   <div class="container mt-4">
     <h3>Add product </h3>
     <hr>
@@ -33,13 +33,23 @@
       <%= form.radio_button :is_active, 'No' %> No<br />
     </p>
 
+    <p>Product images</p>
+    <div>
+      <%= form.fields_for :images do |image| %>
+        <%= render 'image_fields', :form => image %>
+      <% end %>
+      <div >
+        <%= link_to_add_association 'add image', form, :images %>
+      </div>
+    </div><br>
+
     <p>
-      <%= form.label :picture %><br>
-      <%= form.file_field :picture, class: 'btn btn-outline-primary' %>
+      <%= form.label :image ,"Cover image" %><br>
+      <%= form.file_field :image, class: 'btn btn-outline-primary' %>
     </p>
- 
+
     <p>
-      <%= form.submit "Save", class: "btn btn-primary" %>
+      <%= form.submit "Add product", class: "btn btn-primary" %>
     </p> 
   </div>
   

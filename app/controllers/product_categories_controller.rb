@@ -38,8 +38,17 @@ class ProductCategoriesController < ApplicationController
     redirect_to product_categories_path
   end
 
+  def get_products
+    @products = Product.all
+    @products.each do |el|
+      if el.price < 100
+        @product = el
+      end
+    end
+  end
+
 private
   def product_cat_params
-    params.require(:product_categories).permit(:name, :description, :cover_image)
+    params.require(:product_categories).permit(:name, :description, :image)
   end
 end

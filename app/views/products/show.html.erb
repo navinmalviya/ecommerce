@@ -1,41 +1,330 @@
-<div class="container">
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
+  <body>
+    <div id="all">
+      <!-- Top bar-->
+      <div class="top-bar">
+        <div class="container">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-6 d-md-block d-none">
+              <p>Contact us on +420 777 555 333 or hello@universal.com.</p>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex justify-content-md-end justify-content-between">
+                <ul class="list-inline contact-info d-block d-md-none">
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-phone"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+                </ul>
+                <div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Sign In</span></a><a href="customer-register.html" class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span></a></div>
+                <ul class="social-custom list-inline">
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Top bar end-->
+      <!-- Login Modal-->
+      <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
+        <div role="document" class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 id="login-modalLabel" class="modal-title">Customer Login</h4>
+              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+              <form action="customer-orders.html" method="get">
+                <div class="form-group">
+                  <input id="email_modal" type="text" placeholder="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="password_modal" type="password" placeholder="password" class="form-control">
+                </div>
+                <p class="text-center">
+                  <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Log in</button>
+                </p>
+              </form>
+              <p class="text-center text-muted">Not registered yet?</p>
+              <p class="text-center text-muted"><a href="customer-register.html"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Login modal end-->
+      
+      
+      <div id="heading-breadcrumbs">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2"><%= @product.name %></h1>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Product category:</strong>
-  <%= @product.product_category.name %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @product.status %>
-</p>
-
-<p>
-  <strong>Actice?</strong>
-  <%= @product.is_active %>
-</p>
-
-<p>
-  <strong>Cover image:</strong>
-    <% if @product.cover_image.present? %>
-      <%= image_tag @product.cover_image.url %>
-    <% else %>
-      <%= image_tag('noimage.png') %>
-    <% end %>
-  </p>
-
-</div>
+      <div id="content">
+        <div class="container">
+          <div class="row bar">
+            <!-- LEFT COLUMN _________________________________________________________-->
+            <div class="col-lg-9">
+              <div id="productMain" class="row">
+                <div class="col-sm-6">
+                  <div data-slider-id="1" class="owl-carousel shop-detail-carousel">
+                    <% @product.images.each do |image| %>
+                    <div><%= image_tag image.image.url, class: "img-fluid" %></div>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="box">
+                    <form>
+                      <div class="sizes">
+                        <h3><%= @product.name %></h3>
+                      </div>
+                      <p class="price"><%= @product.price %></p>
+                      <p class="text-center">
+                        <button type="submit" class="btn btn-template-outlined"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                        <button type="submit" data-toggle="tooltip" data-placement="top" title="Add to wishlist" class="btn btn-default"><i class="fa fa-heart-o"></i></button>
+                      </p>
+                    </form>
+                  </div>
+                  <div data-slider-id="1" class="owl-thumbs">
+                    <% @product.images.each do |image| %>
+                    <button class="owl-thumb-item"><%= image_tag image.image.url, class: "img-fluid" %></button>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div id="details" class="box mb-4 mt-4">
+                <p></p>
+                <h4>Product details</h4>
+                <p><%= @product.description %></p>
+              </div>
+              <div id="product-social" class="box social text-center mb-5 mt-5">
+                <h4 class="heading-light">Show it to your friends</h4>
+                <ul class="social list-inline">
+                  <li class="list-inline-item"><a href="#" data-animate-hover="pulse" class="external facebook"><i class="fa fa-facebook"></i></a></li>
+                  <li class="list-inline-item"><a href="#" data-animate-hover="pulse" class="external gplus"><i class="fa fa-google-plus"></i></a></li>
+                  <li class="list-inline-item"><a href="#" data-animate-hover="pulse" class="external twitter"><i class="fa fa-twitter"></i></a></li>
+                  <li class="list-inline-item"><a href="#" data-animate-hover="pulse" class="email"><i class="fa fa-envelope"></i></a></li>
+                </ul>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-md-6">
+                  <div class="box text-uppercase mt-0 mb-small">
+                    <h3>You may also like these products</h3>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="product">
+                    <div class="image"><a href="#"><img src="img/product2.jpg" alt="" class="img-fluid image1"></a></div>
+                    <div class="text">
+                      <h3 class="h5"><a href="shop-detail.html">Fur coat</a></h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="product">
+                    <div class="image"><a href="#"><img src="img/product3.jpg" alt="" class="img-fluid image1"></a></div>
+                    <div class="text">
+                      <h3 class="h5"><a href="shop-detail.html">Fur coat</a></h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="product">
+                    <div class="image"><a href="#"><img src="img/product1.jpg" alt="" class="img-fluid image1"></a></div>
+                    <div class="text">
+                      <h3 class="h5"><a href="shop-detail.html">Fur coat</a></h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-md-6">
+                  <div class="box text-uppercase mt-0 mb-small">
+                    <h3>Products viewed recently</h3>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="product">
+                    <div class="image"><a href="#"><img src="img/product3.jpg" alt="" class="img-fluid image1"></a></div>
+                    <div class="text">
+                      <h3 class="h5"><a href="shop-detail.html">Fur coat</a></h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="product">
+                    <div class="image"><a href="#"><img src="img/product1.jpg" alt="" class="img-fluid image1"></a></div>
+                    <div class="text">
+                      <h3 class="h5"><a href="shop-detail.html">Fur coat</a></h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="product">
+                    <div class="image"><a href="#"><img src="img/product2.jpg" alt="" class="img-fluid image1"></a></div>
+                    <div class="text">
+                      <h3 class="h5"><a href="shop-detail.html">Fur coat</a></h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <!-- MENUS AND FILTERS-->
+              <div class="panel panel-default sidebar-menu">
+                <div class="panel-heading">
+                  <h3 class="h4 panel-title">Categories</h3>
+                </div>
+                <div class="panel-body">
+                  <% product_category_list.each do |prod_cat| %>
+                  <ul class="nav nav-pills flex-column text-sm category-menu">
+                    <li class="nav-item"><a href="shop-category.html" class="nav-link d-flex align-items-center justify-content-between"><span><%= link_to prod_cat[0], product_category_path(prod_cat[1])%> </span></a>
+                    </li>
+                  </ul>
+                  <% end %>
+                </div>
+              </div>
+              
+              <div class="panel panel-default sidebar-menu">
+                <div class="panel-heading d-flex align-items-center justify-content-between">
+                  <h3 class="h4 panel-titlen">Colours</h3><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i><span class="d-none d-md-inline-block">Clear</span></a>
+                </div>
+                <div class="panel-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour white"></span> White (14)
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour blue"></span> Blue (10)
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour green"></span>  Green (20)
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour yellow"></span>  Yellow (13)
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour red"></span>  Red (10)
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-sm btn-template-outlined"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+              <div class="banner"><a href="shop-category.html"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- GET IT-->
+      <div class="get-it">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 text-center p-3">
+              <h3>Do you want cool website like this one?</h3>
+            </div>
+            <div class="col-lg-4 text-center p-3">   <a href="#" class="btn btn-template-outlined-white">Buy this template now</a></div>
+          </div>
+        </div>
+      </div>
+      <!-- FOOTER -->
+      <footer class="main-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <h4 class="h6">About Us</h4>
+              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+              <hr>
+              <h4 class="h6">Join Our Monthly Newsletter</h4>
+              <form>
+                <div class="input-group">
+                  <input type="text" class="form-control">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-secondary"><i class="fa fa-send"></i></button>
+                  </div>
+                </div>
+              </form>
+              <hr class="d-block d-lg-none">
+            </div>
+            <div class="col-lg-3">
+              <h4 class="h6">Blog</h4>
+              <ul class="list-unstyled footer-blog-list">
+                <li class="d-flex align-items-center">
+                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <h5 class="mb-0"> <a href="post.html">Blog post name</a></h5>
+                  </div>
+                </li>
+                <li class="d-flex align-items-center">
+                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <h5 class="mb-0"> <a href="post.html">Blog post name</a></h5>
+                  </div>
+                </li>
+                <li class="d-flex align-items-center">
+                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <h5 class="mb-0"> <a href="post.html">Very very long blog post name</a></h5>
+                  </div>
+                </li>
+              </ul>
+              <hr class="d-block d-lg-none">
+            </div>
+            <div class="col-lg-3">
+              <h4 class="h6">Contact</h4>
+              <p class="text-uppercase"><strong>Universal Ltd.</strong><br>13/25 New Avenue <br>Newtown upon River <br>45Y 73J <br>England <br><strong>Great Britain</strong></p><a href="contact.html" class="btn btn-template-main">Go to contact page</a>
+              <hr class="d-block d-lg-none">
+            </div>
+            <div class="col-lg-3">
+              <ul class="list-inline photo-stream">
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="copyrights">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4 text-center-md">
+                <p>&copy; 2018. Your company / name goes here</p>
+              </div>
+              <div class="col-lg-8 text-right text-center-md">
+                <p>Template design by <a href="https://bootstrapious.com/free-templates">Bootstrapious Templates </a></p>
+                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

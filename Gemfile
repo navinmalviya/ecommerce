@@ -65,3 +65,5 @@ gem 'jquery-rails'
 gem "cocoon"
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
+gem 'ransack'
+gem "font-awesome-rails"

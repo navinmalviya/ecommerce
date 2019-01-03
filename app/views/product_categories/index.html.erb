@@ -13,8 +13,8 @@
     <tr>
       <td><%= prod_cat.name %></td>
       <td><%= prod_cat.description %></td>
-      <td><% if prod_cat.cover_image.present? %>
-              <%= image_tag prod_cat.cover_image.thumb.url %>
+      <td><% if prod_cat.image.present? %>
+              <%= image_tag prod_cat.image.thumb.url %>
           <% else %>
               <%= image_tag('noimage.png') %>
       <% end %></td>

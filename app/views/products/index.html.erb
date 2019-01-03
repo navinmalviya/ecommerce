@@ -1,4 +1,6 @@
 <h1 class="mt-4">All products</h1>
+
+
  
 <table class="table mt-4">
   <tr>
@@ -20,8 +22,8 @@
       <td><%= product.product_category.name %></td>
       <td><%= product.status %></td>
       <td><%= product.is_active %></td>
-      <td><% if product.cover_image.present? %>
-              <%= image_tag product.cover_image.thumb.url %>
+      <td><% if product.image.present? %>
+              <%= image_tag product.image.thumb.url %>
           <% else %>
               <%= image_tag('noimage.png') %>
       <% end %></td>

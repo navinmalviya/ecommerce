@@ -1,21 +1,316 @@
-<div class="container">
+<!-- <div class="container">
+<h3>Product category</h3>
 <p>
   <strong>Name:</strong>
-  <%= @product_category.name %>
+  <%#= @product_category.name %>
 </p>
 
 <p>
   <strong>Description:</strong>
-  <%= @product_category.description %>
+  <%#= @product_category.description %>
 </p>
 
 <p>
   <strong>Cover image:</strong>
-  <% if @product_category.cover_image.present? %>
-    <%= image_tag @product_category.cover_image.showthumb.url %>
-  <% else %>
-    <%= image_tag('noimage.png') %>
-  <% end %>
+  <%# if @product_category.image.present? %>
+    <%#= image_tag @product_category.image.showthumb.url %>
+  <%# else %>
+    <%#= image_tag('noimage.png') %>
+  <%# end %>
 </p>
 
-</div>
+<h3>Products</h3>
+<%# product_list.each do |product| %>
+  <%# if @product_category.id == product[2] %>
+    <%#= link_to product[0], product_path(product[1]) %><br>
+  <%# end %>
+<%# end %>
+
+</div> -->
+
+
+
+
+
+
+  <body>
+    <div id="all">
+      <!-- Top bar-->
+      <div class="top-bar">
+        <div class="container">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-6 d-md-block d-none">
+              <p>Contact us on +420 777 555 333 or hello@universal.com.</p>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex justify-content-md-end justify-content-between">
+                <ul class="list-inline contact-info d-block d-md-none">
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-phone"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+                </ul>
+                <div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Sign In</span></a><a href="customer-register.html" class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span></a></div>
+                <ul class="social-custom list-inline">
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Top bar end-->
+      <!-- Login Modal-->
+      <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
+        <div role="document" class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 id="login-modalLabel" class="modal-title">Customer Login</h4>
+              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+              <form action="customer-orders.html" method="get">
+                <div class="form-group">
+                  <input id="email_modal" type="text" placeholder="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="password_modal" type="password" placeholder="password" class="form-control">
+                </div>
+                <p class="text-center">
+                  <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Log in</button>
+                </p>
+              </form>
+              <p class="text-center text-muted">Not registered yet?</p>
+              <p class="text-center text-muted"><a href="customer-register.html"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Login modal end-->
+      
+      
+      <div id="heading-breadcrumbs">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">Category with left sidebar</h1>
+            </div>
+            <div class="col-md-5">
+              <ul class="breadcrumb d-flex justify-content-end">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Category with left sidebar</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="container">
+          <div class="row bar">
+            <div class="col-md-3">
+              <!-- MENUS AND FILTERS-->
+              <div class="panel panel-default sidebar-menu">
+                <div class="panel-heading">
+                  <h3 class="h4 panel-title">Categories</h3>
+                </div>
+                <div class="panel-body">
+                  <% product_category_list.each do |prod_cat| %>
+                  <ul class="nav nav-pills flex-column text-sm category-menu">
+                    <li class="nav-item"><a href="shop-category.html" class="nav-link d-flex align-items-center justify-content-between"><span><%= link_to prod_cat[0], product_category_path(prod_cat[1])%> </span></a>
+                    </li>
+                  </ul>
+                  <% end %>
+                </div>
+              </div>
+              
+
+              <div class="panel panel-default sidebar-menu">
+                <div class="panel-heading d-flex align-items-center justify-content-between">
+                  <h3 class="h4 panel-title">Price</h3><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i><span class="d-none d-md-inline-block">Clear</span></a>
+                </div>
+                <div class="panel-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <%= link_to filter_path, remote: true do %>
+                            <input type="checkbox"> Armani  (10)
+                          <% end %>
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Versace  (12)
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Carlo Bruni  (15)
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Jack Honey  (14)
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-sm btn-template-outlined"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+              
+              
+              
+            </div>
+            <div class="col-md-9">
+              <p class="text-muted lead">In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide. Pellentesque habitant morbi tristique senectus et netuss.</p>
+              <div class="row products products-big">
+                <% product_list.each do |product| %>
+                  <% if @product_category.id == product[2] %>
+                    <%= link_to product_path(product[1]) do %>
+                      <div class="col-lg-4 col-md-6">
+                        <div class="product">
+                          <div class="image"><%= image_tag product[4].url, class: "img-fluid image1"  %></div>
+                            <div class="text">
+                              <h3 class="h5"><%= link_to product[0], product_path(product[1]) %><br></h3>
+                              <p class="price"><%= product[3] %></p>
+                            </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="row">
+                <div class="col-md-12 banner mb-small"><a href="#"><img src="img/banner2.jpg" alt="" class="img-fluid"></a></div>
+              </div>
+              <div class="pages">
+                <p class="loadMore text-center"><a href="#" class="btn btn-template-outlined"><i class="fa fa-chevron-down"></i> Load more</a></p>
+                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                  <ul class="pagination">
+                    <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-double-left"></i></a></li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- GET IT-->
+      <div class="get-it">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 text-center p-3">
+              <h3>Do you want cool website like this one?</h3>
+            </div>
+            <div class="col-lg-4 text-center p-3">   <a href="#" class="btn btn-template-outlined-white">Buy this template now</a></div>
+          </div>
+        </div>
+      </div>
+      <!-- FOOTER -->
+      <footer class="main-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <h4 class="h6">About Us</h4>
+              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+              <hr>
+              <h4 class="h6">Join Our Monthly Newsletter</h4>
+              <form>
+                <div class="input-group">
+                  <input type="text" class="form-control">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-secondary"><i class="fa fa-send"></i></button>
+                  </div>
+                </div>
+              </form>
+              <hr class="d-block d-lg-none">
+            </div>
+            <div class="col-lg-3">
+              <h4 class="h6">Blog</h4>
+              <ul class="list-unstyled footer-blog-list">
+                <li class="d-flex align-items-center">
+                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <h5 class="mb-0"> <a href="post.html">Blog post name</a></h5>
+                  </div>
+                </li>
+                <li class="d-flex align-items-center">
+                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <h5 class="mb-0"> <a href="post.html">Blog post name</a></h5>
+                  </div>
+                </li>
+                <li class="d-flex align-items-center">
+                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <h5 class="mb-0"> <a href="post.html">Very very long blog post name</a></h5>
+                  </div>
+                </li>
+              </ul>
+              <hr class="d-block d-lg-none">
+            </div>
+            <div class="col-lg-3">
+              <h4 class="h6">Contact</h4>
+              <p class="text-uppercase"><strong>Universal Ltd.</strong><br>13/25 New Avenue <br>Newtown upon River <br>45Y 73J <br>England <br><strong>Great Britain</strong></p><a href="contact.html" class="btn btn-template-main">Go to contact page</a>
+              <hr class="d-block d-lg-none">
+            </div>
+            <div class="col-lg-3">
+              <ul class="list-inline photo-stream">
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="copyrights">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4 text-center-md">
+                <p>&copy; 2018. Your company / name goes here</p>
+              </div>
+              <div class="col-lg-8 text-right text-center-md">
+                <p>Template design by <a href="https://bootstrapious.com/free-templates">Bootstrapious Templates </a></p>
+                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Javascript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="vendor/waypoints/lib/jquery.waypoints.min.js"> </script>
+    <script src="vendor/jquery.counterup/jquery.counterup.min.js"> </script>
+    <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
+    <script src="js/jquery.parallax-1.1.3.js"></script>
+    <script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="vendor/jquery.scrollto/jquery.scrollTo.min.js"></script>
+    <script src="js/front.js"></script>
+  </body>
+</html>
+<script type="text/javascript">
+$.ajax({
+  type: "GET",
+  url: "/filter",
+  success: function(data) {
+    console.log(data);
+  }
+});
+</script>
+

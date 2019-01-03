@@ -1,0 +1,17 @@
+<div class="sidenav">
+  <p class="mt-2 ml-2 text-white">Product Categories</p>
+  <% product_category_list.each do |prod_cat| %>
+    <%= link_to prod_cat[0], product_category_path(prod_cat[1])%>
+  <% end %>
+</div>
+<%= search_form_for @search do |f| %>
+  <div class="main mt-2">
+    <%= f.label :name_cont, "Products" %>
+    <%= f.text_field :name_cont %>
+  </div>
+  <div class="actions main"><%= f.submit "Search" %></div>
+<% end %>
+
+
+
+

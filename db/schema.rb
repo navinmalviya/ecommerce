@@ -12,19 +12,19 @@
 
 ActiveRecord::Schema.define(version: 2018_12_24_070225) do
 
-  create_table "pictures", force: :cascade do |t|
-    t.string "picture"
-    t.integer "pictureable_id"
-    t.string "pictureable_type"
+  create_table "images", force: :cascade do |t|
+    t.string "image"
+    t.integer "imageable_id"
+    t.string "imageable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pictureable_type", "pictureable_id"], name: "index_pictures_on_pictureable_type_and_pictureable_id"
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
   create_table "product_categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "cover_image"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,10 +35,12 @@ ActiveRecord::Schema.define(version: 2018_12_24_070225) do
     t.integer "price"
     t.integer "product_category_id"
     t.string "cover_image"
+    t.string "image"
     t.boolean "is_active"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end
 
 end
